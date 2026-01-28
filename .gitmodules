@@ -1,0 +1,3 @@
+[submodule "index-tts"]
+	path = index-tts
+	url = https://github.com/nyanfox87/index-tts
