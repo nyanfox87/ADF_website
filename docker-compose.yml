@@ -1,0 +1,15 @@
+include:
+  - path: ./index-tts/docker-compose.yml
+  - path: ./index-tts/docker-compose-v1.yml
+  # indextts1.5:
+  #   extends:
+  #     file: index-tts/docker-compose-v1.5.yml
+  #     service: indextts1.5-api
+  #   ports:
+  #     - "8001:8001"
+  # indextts:
+  #   extends:
+  #     file: index-tts/docker-compose-v1.yml
+  #     service: indextts-api
+  #   ports:
+  #     - "8002:8002"
