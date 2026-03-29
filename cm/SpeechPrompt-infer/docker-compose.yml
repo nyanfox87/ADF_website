@@ -1,0 +1,36 @@
+services:
+  speechprompt-infer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: speechprompt-infer
+    command: ["uv", "run", "uvicorn", "speechprompt_fastapi:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "${SPEECHPROMPT_PORT:-8013}:8000"
+    volumes:
+      # checkpoints — mount actual files (symlinks don't work in Docker bind mounts)
+      - /home/brant/Project/MLentry/exp/FSD/SpeechPrompt_v2/std_learn_dp5_InTheWild_copy/storage/GSLM/exp_results/FSD_MLAADv8/MLAADv8_learn_dp5_seed1003/checkpoints/base_prompt_model.pt:/app/checkpoints/base_prompt_model.pt:ro
+      - /home/brant/Project/MLentry/exp/FSD/SpeechPrompt_v2/std_learn_dp5_InTheWild_copy/storage/GSLM/exp_results/FSD_MLAADv8/MLAADv8_learn_dp5_seed1003/checkpoints/checkpoint_best.pt:/app/checkpoints/checkpoint_best.pt:ro
+      # pretrained models
+      - /home/brant/Project/MLentry/pretrained/SpeechPrompt_v2/HuBERT/hubert_base_ls960.pt:/app/pretrained/hubert_base_ls960.pt:ro
+      - /home/brant/Project/MLentry/pretrained/SpeechPrompt_v2/HuBERT/km.bin:/app/pretrained/km.bin:ro
+      # temp upload dir
+      - ./temp:/app/temp
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+    networks:
+      - ADF
+
+networks:
+  ADF:
+    driver: bridge
+    name: adf_network
+    external: true

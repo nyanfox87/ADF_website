@@ -1,0 +1,4 @@
+prompt_param_filter:
+  - "sep"
+  - "prompt"
+  - "verbalizer"

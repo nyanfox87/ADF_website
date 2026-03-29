@@ -1,0 +1,19 @@
+services:
+  frontend:
+    build: .
+    container_name: ADF_frontend
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: ["npm", "run", "dev"]
+    restart: unless-stopped
+    networks:
+      - ADF
+networks:
+  ADF:
+    driver: bridge
+    name: adf_network
+    external: true

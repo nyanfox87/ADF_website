@@ -1,6 +1,11 @@
 include:
-  - path: ./index-tts/docker-compose.yml
-  - path: ./index-tts/docker-compose-v1.yml
+  - path: ./tts/index-tts/docker-compose.yml
+  - path: ./tts/index-tts/docker-compose-v1.yml
+  - path: ./cm/MFA-Conformer-infer/docker-compose.yml
+  - path: ./cm/AASIST-infer/docker-compose.yml
+  - path: ./cm/SpeechPrompt-infer/docker-compose.yml
+  - path: ./asr/docker-compose.yml
+  # - path: ./frontend/docker-compose-dev.yml
   # indextts1.5:
   #   extends:
   #     file: index-tts/docker-compose-v1.5.yml
@@ -13,3 +18,18 @@ include:
   #     service: indextts-api
   #   ports:
   #     - "8002:8002"
+# services:
+#   cloudflared:
+#     image: cloudflare/cloudflared:latest
+#     container_name: cloudflared
+#     command: tunnel --no-autoupdate run
+#     env_file:
+#       - ./.cloudflared.env
+#     restart: unless-stopped
+#     networks:
+#       - ADF
+networks:
+  ADF:
+    driver: bridge
+    name: adf_network
+    external: true

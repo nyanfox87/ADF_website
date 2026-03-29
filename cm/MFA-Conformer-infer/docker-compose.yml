@@ -1,0 +1,30 @@
+services:
+  mfa-conformer-infer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mfa-conformer-infer
+    command: ["uv", "run", "uvicorn", "mfa_fastapi:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "${MFA_CONFORMER_PORT:-8011}:8000"
+    volumes:
+      - ./checkpoints:/app/checkpoints:ro
+      - ./temp:/app/temp
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    networks:
+      - ADF
+
+networks:
+  ADF:
+    driver: bridge
+    name: adf_network
+    external: true

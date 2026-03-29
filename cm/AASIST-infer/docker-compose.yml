@@ -1,0 +1,31 @@
+services:
+  aasist-infer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aasist-infer
+    command: ["uv", "run", "uvicorn", "aasist_fastapi:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "${AASIST_PORT:-8012}:8000"
+    volumes:
+      - ./models:/app/models:ro
+      - /home/brant/Project/MLentry/pretrained/SSL_AASIST/fairseq_xlsr2_300m.pt:/app/pretrained/fairseq_xlsr2_300m.pt:ro
+      - ./temp:/app/temp
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+    networks:
+      - ADF
+
+networks:
+  ADF:
+    driver: bridge
+    name: adf_network
+    external: true

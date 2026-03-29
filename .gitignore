@@ -1,0 +1,41 @@
+# Submodule legacy ignore
+MFA-Conformer/
+cm/MFA-Conformer/
+
+# Python virtual environments (contain huge CUDA/torch .so files)
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node.js
+node_modules/
+
+# Next.js build output
+.next/
+out/
+.cache/
+
+# HuggingFace model cache (download on demand)
+hf_cache/
+
+# Temporary upload/inference files
+temp/
+tmp/
+
+# Environment secrets (tokens, keys)
+.env
+.cloudflared.env
+!.env.example
+
+# Third-party packages checked out locally
+fairseq/
+
+# OS
+.DS_Store
+Thumbs.db
