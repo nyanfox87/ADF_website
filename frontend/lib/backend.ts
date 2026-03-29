@@ -1,10 +1,10 @@
-const INDEXTTS2_URL     = process.env.INDEXTTS2_URL     ?? 'http://indextts2-api:8031';
-const INDEXTTS1_5_URL   = process.env.INDEXTTS1_5_URL   ?? 'http://indextts1-api:8032';
-const FISHAUDIO_URL     = process.env.FISHAUDIO_URL     ?? 'http://fishaudio-api:8033';
-const MFA_CONFORMER_URL = process.env.MFA_CONFORMER_URL ?? 'http://mfa-conformer-infer:8011';
-const AASIST_URL        = process.env.AASIST_URL        ?? 'http://aasist-infer:8012';
-const SPEECHPROMPT_URL  = process.env.SPEECHPROMPT_URL  ?? 'http://speechprompt-infer:8013';
-const ASR_URL           = process.env.ASR_URL           ?? 'http://asr_whisper:8000';
+const INDEXTTS2_URL     = process.env.INDEXTTS2_URL     ?? 'http://localhost:8031';
+const INDEXTTS1_5_URL   = process.env.INDEXTTS1_5_URL   ?? 'http://localhost:8032';
+const FISHAUDIO_URL     = process.env.FISHAUDIO_URL     ?? 'http://localhost:8033';
+const MFA_CONFORMER_URL = process.env.MFA_CONFORMER_URL ?? 'http://localhost:8011';
+const AASIST_URL        = process.env.AASIST_URL        ?? 'http://localhost:8012';
+const SPEECHPROMPT_URL  = process.env.SPEECHPROMPT_URL  ?? 'http://localhost:8013';
+const ASR_URL           = process.env.ASR_URL           ?? 'http://localhost:8021';
 
 export const BACKEND_URLS = {
   TTS: {
